@@ -39,7 +39,7 @@ def print_params(params):
 
 
 with open("settings_path.txt") as f:
-    settings_path = f.read()
+    settings_path = f.read().strip()
 
 print("Settings path:", settings_path)
 
@@ -160,8 +160,12 @@ for column in tempcolumns:
 for column in columns:
     tempcolumns.append(column)
 columns = tempcolumns
+print("Columns in details before filtering:", details.columns.tolist())
+print("Columns we are trying to select:", columns)
 details = details[columns]
 new_rows = details[~details['id'].isin(interview_sheet_data['id'])]
+
+
 
 
 def append_row_to_sheet(interview_worksheet, source_row_index, interview_time):
@@ -274,6 +278,7 @@ def send_message(name, phone_number, message, phone_number_backup = None):
         try:
             # pywhatkit.sendwhatmsg_instantly(str(phone_number), message, wait_time=20, tab_close=True)
             # messenger.send_direct_message(str(phone_number), message, False)
+            # result, status = messenger.send_direct_message(str(phone_number),message,False)
             result, status = run_with_timeout(messenger.send_direct_message, args=(str(phone_number),message,False), timeout=PARAMS["timeout"])
             if status == False:
                 timeout_tries += 1

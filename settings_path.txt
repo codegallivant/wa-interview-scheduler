@@ -1,1 +1,1 @@
-settings/ai_settings.yaml
+settings/settings.yaml

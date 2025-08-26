@@ -4,7 +4,7 @@ import yaml
 import os
 
 with open("settings_path.txt") as f:
-    settings_path = f.read()
+    settings_path = f.read().strip()
 
 print("Settings path:",settings_path)
 
